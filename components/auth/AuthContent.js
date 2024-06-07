@@ -54,11 +54,7 @@ const AuthContent = () => {
         credentialsInvalid={credentialsInvalid}
       />
       <View>
-        <FlatButton
-          onPress={() => {
-            setIsLogin(!isLogin);
-          }}
-        >
+        <FlatButton>
           {isLogin ? '회원 가입하기' : '로그인 화면으로 이동하기'}
         </FlatButton>
       </View>
