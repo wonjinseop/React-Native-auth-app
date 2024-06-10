@@ -5,14 +5,21 @@ const authenticate = async (email, password) => {
   const res = await fetch(url, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: {
+    body: JSON.stringify({
       email,
       password,
-    },
+    }),
   });
+  console.log('status: ', res.status);
+  if (res.status === 400) {
+    const text = await res.text();
+    console.log(text);
+    return;
+  }
 
   const result = await res.json();
   console.log('로그인 결과: ', result);
+  return result.token;
 };
 
 export function login(email, password) {

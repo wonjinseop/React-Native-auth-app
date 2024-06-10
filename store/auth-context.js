@@ -12,8 +12,8 @@ const AuthContextProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const authenticate = (token) => {
-    AsyncStorage.setItem('ACCESS_TOKEN', token.access_token);
-    AsyncStorage.setItem('REFRESH_TOKEN', token.refresh_token);
+    AsyncStorage.setItem('ACCESS_TOKEN', token.accessToken);
+    AsyncStorage.setItem('REFRESH_TOKEN', token.refreshToken);
     setIsLoggedIn(true);
   };
 

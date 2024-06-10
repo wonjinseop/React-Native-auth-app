@@ -32,27 +32,34 @@ const AuthStack = () => {
 // 인증이 완료된 사용자가 보게 될 stack
 const AuthenticatedStack = () => {
   const { logout } = useContext(AuthContext);
-  <Stack.Navigator
-    screenOptions={{
-      // Header 블록에 대한 스타일
-      headerStyle: { backgroundColor: Colors.primary500 },
-      // Header의 텍스트, 버튼 색상
-      headerTintColor: 'white',
-      contentStyle: { backgroundColor: Colors.primary100 },
-    }}
-  >
-    <Stack.Screen
-      name='Welcome'
-      component={WelcomeScreen}
-      options={{
-        headerRight: () => {
-          return (
-            <IconButton icon='exit' color='white' size={30} onPress={logout} />
-          );
-        },
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        // Header 블록에 대한 스타일
+        headerStyle: { backgroundColor: Colors.primary500 },
+        // Header의 텍스트, 버튼 색상
+        headerTintColor: 'white',
+        contentStyle: { backgroundColor: Colors.primary100 },
       }}
-    />
-  </Stack.Navigator>;
+    >
+      <Stack.Screen
+        name='Welcome'
+        component={WelcomeScreen}
+        options={{
+          headerRight: () => {
+            return (
+              <IconButton
+                icon='exit'
+                color='white'
+                size={30}
+                onPress={logout}
+              />
+            );
+          },
+        }}
+      />
+    </Stack.Navigator>
+  );
 };
 
 const Navigation = () => {

@@ -16,6 +16,7 @@ const LoginScreen = () => {
       console.log('token: ', token);
       authenticate(token);
     } catch (error) {
+      console.log('error: ', error);
       // Alert.alert(error);
     }
   };
