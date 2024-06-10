@@ -1,10 +1,12 @@
-import { Alert, View } from 'react-native';
+import { Alert, StyleSheet, View } from 'react-native';
 import AuthForm from './AuthForm';
 import FlatButton from '../ui/FlatButton';
 import { useState } from 'react';
+import { Colors } from '../../constants/styles';
+import { useNavigation } from '@react-navigation/native';
 
-const AuthContent = () => {
-  const [isLogin, setIsLogin] = useState(false);
+const AuthContent = ({ onAuthenticate, isLogin }) => {
+  const navigation = useNavigation();
 
   const [credentialsInvalid, setCredentialsInvalid] = useState({
     email: false,
@@ -41,20 +43,30 @@ const AuthContent = () => {
         password: !passwordIsValid,
         confirmPassword: !passwordIsValid || !passwordsAreEqual,
       });
+      return;
     }
 
     // 회원가입 or 로그인 처리
+    onAuthenticate({ email, password, name });
+  };
+
+  const switchAuthModeHandler = () => {
+    if (isLogin) {
+      navigation.replace('Signup');
+    } else {
+      navigation.replace('Login');
+    }
   };
 
   return (
-    <View>
+    <View style={styles.authContent}>
       <AuthForm
         isLogin={isLogin}
         onSubmit={submitHandler}
         credentialsInvalid={credentialsInvalid}
       />
       <View>
-        <FlatButton>
+        <FlatButton onPress={switchAuthModeHandler}>
           {isLogin ? '회원 가입하기' : '로그인 화면으로 이동하기'}
         </FlatButton>
       </View>
@@ -63,3 +75,18 @@ const AuthContent = () => {
 };
 
 export default AuthContent;
+
+const styles = StyleSheet.create({
+  authContent: {
+    marginTop: 64,
+    marginHorizontal: 32,
+    padding: 16,
+    borderRadius: 8,
+    backgroundColor: Colors.primary800,
+    elevation: 2,
+    shadowColor: 'black',
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.35,
+    shadowRadius: 4,
+  },
+});
