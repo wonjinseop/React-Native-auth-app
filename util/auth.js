@@ -19,7 +19,7 @@ const authenticate = async (email, password) => {
 
   const result = await res.json();
   console.log('로그인 결과: ', result);
-  return result.token;
+  return result;
 };
 
 export function login(email, password) {
